@@ -8,10 +8,19 @@ atualizado em 19/11/2015
 
 #define STEP 2
 #define DIR 3
-#define EN_1 5
-#define EN_2 6
-#define EN_3 7
-#define EN_4 8
+#define EN_1 4
+
+#define STEP_2 6
+#define DIR_2 8
+#define EN_2 9
+
+#define STEP_3 10
+#define DIR_3 11
+#define EN_3 12
+
+#define STEP_4 14
+#define DIR_4 15
+#define EN_4 16
 
 
 
@@ -26,11 +35,17 @@ void setup()
   
   Serial.begin(19200);
     
-  for (int i = 2; i <= 8; i++)  
+  for (int i = 2; i <= 16; i++)  
     pinMode(i, OUTPUT);
   
   digitalWrite(STEP, LOW );
-  digitalWrite( DIR, LOW );
+  digitalWrite(STEP_2, LOW );
+  digitalWrite(STEP_3, LOW );
+  digitalWrite(STEP_4, LOW );
+  digitalWrite(DIR, LOW );
+  digitalWrite(DIR_2, LOW );
+  digitalWrite(DIR_3, LOW );
+  digitalWrite(DIR_4, LOW );
   digitalWrite(EN_1, HIGH);
   digitalWrite(EN_2, HIGH);
   digitalWrite(EN_3, HIGH);
