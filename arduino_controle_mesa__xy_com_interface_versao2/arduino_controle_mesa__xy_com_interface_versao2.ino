@@ -6,8 +6,8 @@ atualizado em 19/11/2015
 
 
 
-#define STEP 2
-#define DIR 3
+#define STEP_1 2
+#define DIR_1 3
 #define EN_1 4
 
 #define STEP_2 6
@@ -38,11 +38,11 @@ void setup()
   for (int i = 2; i <= 16; i++)  
     pinMode(i, OUTPUT);
   
-  digitalWrite(STEP, LOW );
+  digitalWrite(STEP_1, LOW );
   digitalWrite(STEP_2, LOW );
   digitalWrite(STEP_3, LOW );
   digitalWrite(STEP_4, LOW );
-  digitalWrite(DIR, LOW );
+  digitalWrite(DIR_1, LOW );
   digitalWrite(DIR_2, LOW );
   digitalWrite(DIR_3, LOW );
   digitalWrite(DIR_4, LOW );
@@ -152,7 +152,7 @@ void varrer_amostra(int motor_h, int motor_v, int pah, int pav, int poh, int pov
   boolean dirh=LOW;
   int pontos_v = 0;
   
-  digitalWrite(DIR, dirh);
+  digitalWrite(DIR_1, dirh);
   
 // Alinhamento
 
@@ -161,18 +161,18 @@ void varrer_amostra(int motor_h, int motor_v, int pah, int pav, int poh, int pov
   ligar_1_motor(motor_h);  // liga somente o motor horizontal
   for (int i = 1; i <=(pah/2); i++) 
   {
-     digitalWrite(STEP, HIGH);
+     digitalWrite(STEP_1, HIGH);
      delay(10);
-     digitalWrite(STEP, LOW);
+     digitalWrite(STEP_1, LOW);
      delay(10);
   };
   
   ligar_1_motor(motor_v);  // liga somente o motor vertical
   for (int i = 1; i <=(pav/2); i++) 
   {
-     digitalWrite(STEP, HIGH);
+     digitalWrite(STEP_1, HIGH);
      delay(10);
-     digitalWrite(STEP, LOW);
+     digitalWrite(STEP_1, LOW);
      delay(10);
   };
   pontos_v++;
@@ -192,9 +192,9 @@ void varrer_amostra(int motor_h, int motor_v, int pah, int pav, int poh, int pov
         ligar_1_motor(motor_h);  // liga somente o motor horizontal
         for (int i = 1; i <=(pah); i++) 
         {
-           digitalWrite(STEP, HIGH);
+           digitalWrite(STEP_1, HIGH);
            delay(10);
-           digitalWrite(STEP, LOW);
+           digitalWrite(STEP_1, LOW);
            delay(10);
         };
         pontos_v++;
@@ -202,13 +202,13 @@ void varrer_amostra(int motor_h, int motor_v, int pah, int pav, int poh, int pov
         delay(tc*1000);
      }
     
-     digitalWrite(DIR, LOW); // reajusta a direção para o motor vertical
+     digitalWrite(DIR_1, LOW); // reajusta a direção para o motor vertical
      ligar_1_motor(motor_v);   // liga somente o motor vertical
      for (int i = 1; i <=(pav); i++) 
      {
-        digitalWrite(STEP, HIGH);
+        digitalWrite(STEP_1, HIGH);
         delay(10);
-        digitalWrite(STEP, LOW);
+        digitalWrite(STEP_1, LOW);
         delay(10);
      };
      pontos_v++;
@@ -216,7 +216,7 @@ void varrer_amostra(int motor_h, int motor_v, int pah, int pav, int poh, int pov
      delay(tc*1000);
 
      dirh = !dirh;              // inversão de sentido do motor horizontal 
-     digitalWrite(DIR, dirh);
+     digitalWrite(DIR_1, dirh);
      
   }
   
@@ -225,9 +225,9 @@ void varrer_amostra(int motor_h, int motor_v, int pah, int pav, int poh, int pov
      ligar_1_motor(motor_h);  // liga somente o motor horizontal
      for (int i = 1; i <=(pah); i++) 
      {
-        digitalWrite(STEP, HIGH);
+        digitalWrite(STEP_1, HIGH);
         delay(10);
-        digitalWrite(STEP, LOW);
+        digitalWrite(STEP_1, LOW);
         delay(10);
      };
      pontos_v++;
@@ -238,27 +238,27 @@ void varrer_amostra(int motor_h, int motor_v, int pah, int pav, int poh, int pov
 //retorno ao ponto inicial
 
   Serial.println("Retornando ao ponto inicial");
-  digitalWrite(DIR, HIGH);
+  digitalWrite(DIR_1, HIGH);
 
   ligar_1_motor(motor_v);  // liga somente o motor vertical
   for (int i = 1; i <=(pav*(pov-1)+(pav/2)); i++) 
   {
-     digitalWrite(STEP, HIGH);
+     digitalWrite(STEP_1, HIGH);
      delay(10);
-     digitalWrite(STEP, LOW);
+     digitalWrite(STEP_1, LOW);
      delay(10);
   };
   
   if (dirh)
   {
-     digitalWrite(DIR, HIGH);
+     digitalWrite(DIR_1, HIGH);
      
      ligar_1_motor(motor_h);  // liga somente o motor horizontal
      for (int i = 1; i <=(pah/2); i++) 
      {
-       digitalWrite(STEP, HIGH);
+       digitalWrite(STEP_1, HIGH);
        delay(10);
-       digitalWrite(STEP, LOW);
+       digitalWrite(STEP_1, LOW);
        delay(10);
      };
     
@@ -266,14 +266,14 @@ void varrer_amostra(int motor_h, int motor_v, int pah, int pav, int poh, int pov
   }
   else
   {
-     digitalWrite(DIR, HIGH);
+     digitalWrite(DIR_1, HIGH);
 
      ligar_1_motor(motor_h);  // liga somente o motor horizontal
      for (int i = 1; i <=(pah*(poh-1)+(pah/2)); i++) 
      {
-        digitalWrite(STEP, HIGH);
+        digitalWrite(STEP_1, HIGH);
         delay(10);
-        digitalWrite(STEP, LOW);
+        digitalWrite(STEP_1, LOW);
         delay(10);
      };  
   }
@@ -283,7 +283,7 @@ void varrer_amostra(int motor_h, int motor_v, int pah, int pav, int poh, int pov
   
   
   desligar_motores();
-  digitalWrite(DIR, LOW); // ajusta o pino de direção do motor horizontal para o valor inicial
+  digitalWrite(DIR_1, LOW); // ajusta o pino de direção do motor horizontal para o valor inicial
   pontos_v = 0;
   Serial.println("Fim");
 }
@@ -291,7 +291,7 @@ void varrer_amostra(int motor_h, int motor_v, int pah, int pav, int poh, int pov
 
 void rotacao_amostra(int motor,int pontos,int passos,int t_coleta)
 {
-   digitalWrite(DIR, LOW); //define sendido de rotação do motor
+   digitalWrite(DIR_1, LOW); //define sendido de rotação do motor
    int pontos_r = 0;
 
    //liga o motor selecionado e desliga os outros
@@ -303,9 +303,9 @@ void rotacao_amostra(int motor,int pontos,int passos,int t_coleta)
    {
        for (int i = 1; i <=(passos); i++) 
        {
-           digitalWrite(STEP, HIGH);
+           digitalWrite(STEP_1, HIGH);
            delay(10);
-           digitalWrite(STEP, LOW);
+           digitalWrite(STEP_1, LOW);
            delay(10);
        };
        pontos_r++;               //incrementa o contador de pontos
@@ -322,7 +322,33 @@ void rotacao_amostra(int motor,int pontos,int passos,int t_coleta)
 
 void translacao_amostra(int motor, int passos, boolean direcao)
 {
-   digitalWrite(DIR, direcao); //ajusta o pino DIR para a direção selecionada
+   int dir_trans = DIR_1;
+   int step_trans = STEP_1;
+   switch (motor)
+   {
+      case 1:
+        dir_trans = DIR_1;
+        step_trans = STEP_1;
+      break;
+        
+      case 2:
+        dir_trans = DIR_2;
+        step_trans = STEP_2;
+      break;
+
+      case 3:
+        dir_trans = DIR_3;
+        step_trans = STEP_3;
+      break;
+
+      case 4:
+        dir_trans = DIR_4;
+        step_trans = STEP_4;
+      break;
+    
+   }
+   
+   digitalWrite(dir_trans, direcao); //ajusta o pino DIR para a direção selecionada
    
    //liga o motor selecionado e desliga os outros
    ligar_1_motor(motor);
@@ -331,9 +357,9 @@ void translacao_amostra(int motor, int passos, boolean direcao)
    Serial.println("Inicio");
    for (int i = 1; i <=(passos); i++) 
    {
-      digitalWrite(STEP, HIGH);
+      digitalWrite(step_trans, HIGH);
       delay(10);
-      digitalWrite(STEP, LOW);
+      digitalWrite(step_trans, LOW);
       delay(10);
    };
    Serial.println("Fim");

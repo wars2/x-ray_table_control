@@ -1103,7 +1103,7 @@ private: System::Void button1_Click(System::Object^  sender, System::EventArgs^ 
 					  {
 						serialPort1->Write("c"); //centralização
 					    serialPort1->Write("d"); //motor
-				        serialPort1->Write((comboBox2->SelectedIndex+1).ToString());
+				        serialPort1->Write((comboBox4->SelectedIndex+1).ToString());
 				        serialPort1->Write("*");
 
 						serialPort1->Write("c"); //centralização
@@ -1117,13 +1117,14 @@ private: System::Void button1_Click(System::Object^  sender, System::EventArgs^ 
 				        if (pon_med_cen >= 0) serialPort1->Write("1");
 				        serialPort1->Write("*");
 						
-					    serialPort1->Write("c"); //centralização
-					    serialPort1->Write("d"); //motor
-				        serialPort1->Write((comboBox2->SelectedIndex+1).ToString());
-				        serialPort1->Write("*");
 					  }
 					  else
 					  {
+						serialPort1->Write("c"); //centralização
+						serialPort1->Write("d"); //motor
+						serialPort1->Write((comboBox4->SelectedIndex + 1).ToString());
+						serialPort1->Write("*");
+
 						serialPort1->Write("c"); //centralização
 						serialPort1->Write("e"); //passos
 						if     (comboBox4->SelectedItem->ToString() == "1")
